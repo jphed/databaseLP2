@@ -45,8 +45,11 @@ class App():
 
 
         # Entry (Sueldo)
+        ttk.Label(self.window, text="Salary").grid(column=0,row=8, sticky="W", ipadx=5, ipady=5)
+        self.salary = tk.StringVar()
+        ttk.Entry(self.window, textvariable=self.salary, width=15).grid(column=1, row=8, sticky="WE", padx=20) 
                        
-        # Botones
+        # Botones uwu
         ttk.Button(self.window, text="Add", command=self.agregar).grid(column=0,row=15, sticky="WE", padx=10)
         ttk.Button(self.window, text="Update", command=self.actualizar).grid(column=1,row=15, sticky="WE", padx=10)
         ttk.Button(self.window, text="Delete", command=self.borrar).grid(column=2,row=15, sticky="WE", padx=10)
@@ -57,8 +60,9 @@ class App():
         self.nuevo()
         self.window.mainloop()
         
-    def agregar(self):  
-        pass
+    def agregar(self): 
+        empleado = e.Empleado(self.id.get(), self.name.get(), self.last_name.get(), self.gender.get(), self.department.get(), self.salary.get())
+        eu.EmpleadoArchivo.agregar(empleado)
 
     def buscar(self):
         pass
@@ -75,6 +79,7 @@ class App():
         self.last_name.set("")
         self.gender.set("")
         self.department.set("")
+        self.salary.set("")
 
 if __name__ == '__main__':
     App()
