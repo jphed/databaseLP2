@@ -40,19 +40,19 @@ class App():
         # Combobox (Departamento)
 
         ttk.Label(self.window, text="Department").grid(column=0,row=6, sticky="W", ipadx=5, ipady=5)
-        department = ttk.Combobox(state="readonly", values=["A", "B", "C", "D"])
-        department.grid(column=0,row=7, sticky="W", padx=5, pady=5)
+        self.department = ttk.Combobox(state="readonly", values=["A", "B", "C", "D"])
+        self.department.grid(column=0,row=7, sticky="W", padx=5, pady=5)
 
 
         # Entry (Sueldo)
                        
         # Botones
-        ttk.Button(self.window, text="Agregar", command=self.agregar).grid(column=0,row=15, sticky="WE", padx=10)
-        ttk.Button(self.window, text="Actualizar", command=self.actualizar).grid(column=1,row=15, sticky="WE", padx=10)
-        ttk.Button(self.window, text="Borrar", command=self.borrar).grid(column=2,row=15, sticky="WE", padx=10)
-        ttk.Button(self.window, text="Buscar", command=self.buscar).grid(column=3,row=15, sticky="WE", padx=10)
-        ttk.Button(self.window, text="Nuevo", command=self.nuevo).grid(column=0,row=16, columnspan=3, sticky="WE", padx=10)
-        ttk.Button(self.window, text="Salir", command= self.window.destroy).grid(column=3,row=16, sticky="WE", padx=10)
+        ttk.Button(self.window, text="Add", command=self.agregar).grid(column=0,row=15, sticky="WE", padx=10)
+        ttk.Button(self.window, text="Update", command=self.actualizar).grid(column=1,row=15, sticky="WE", padx=10)
+        ttk.Button(self.window, text="Delete", command=self.borrar).grid(column=2,row=15, sticky="WE", padx=10)
+        ttk.Button(self.window, text="Search", command=self.buscar).grid(column=3,row=15, sticky="WE", padx=10)
+        ttk.Button(self.window, text="New", command=self.nuevo).grid(column=0,row=16, columnspan=3, sticky="WE", padx=10)
+        ttk.Button(self.window, text="Quit", command= self.window.destroy).grid(column=3,row=16, sticky="WE", padx=10)
 
         self.nuevo()
         self.window.mainloop()
@@ -70,7 +70,11 @@ class App():
         pass
 
     def nuevo(self):
-        pass
+        self.id.set("")
+        self.name.set("")
+        self.last_name.set("")
+        self.gender.set("")
+        self.department.set("")
 
 if __name__ == '__main__':
     App()
