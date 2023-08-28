@@ -65,7 +65,14 @@ class App():
         eu.EmpleadoArchivo.agregar(empleado)
 
     def buscar(self):
-        pass
+
+        data = eu.EmpleadoArchivo.buscar(self.id.get())
+        self.id.set(data.id)
+        self.name.set(data.nombre)
+        self.last_name.set(data.apellido1)
+        self.gender.set(data.sexo) #esto todavia no sirve xd
+
+
 
     def borrar(self):
         pass
