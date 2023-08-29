@@ -3,6 +3,8 @@ from tkinter import ttk
 from tkinter import simpledialog
 import empleado as e
 import empleado_util as eu
+from tkinter import messagebox
+from tkinter.simpledialog import askstring
 
 # Empleados
 
@@ -61,21 +63,53 @@ class App():
         self.window.mainloop()
         
     def agregar(self): 
-        empleado = e.Empleado(self.id.get(), self.name.get(), self.last_name.get(), self.gender.get(), self.department.get(), self.salary.get())
-        eu.EmpleadoArchivo.agregar(empleado)
+        data = e.Empleado(self.id.get(), self.name.get(), self.last_name.get(), self.gender.get(), self.department.get(), self.salary.get())
+        eu.EmpleadoArchivo.agregar(data)
 
     def buscar(self):
 
-        data = eu.EmpleadoArchivo.buscar(self.id.get())
-        self.id.set(data.id)
-        self.name.set(data.nombre)
-        self.last_name.set(data.apellido1)
-        self.gender.set(data.sexo) #esto todavia no sirve xd
+        employeeID = askstring('EmployeeID', 'Type the employee ID')
+        data = eu.EmpleadoArchivo.buscar(int(employeeID))
 
-
+        if data == None:
+            messagebox.showerror("IDnotFound", "Couldn't find employee with such ID")
+        else:
+            self.id.set(data.id)
+            self.name.set(data.nombre)
+            self.last_name.set(data.apellido1)
+            self.gender.set(data.sexo)
+            self.department.set(data.departamento)
+            self.salary.set(data.sueldo)
+        
 
     def borrar(self):
-        pass
+        employeeID = askstring('EmployeeID', 'Type the employee ID')
+        data = eu.EmpleadoArchivo.borrar(int(employeeID))
+        fd = open("datos.txt", 'r')
+            
+        if data == True: #entra al if
+            deleteLine = 1
+            for rows in fd:
+                filedata_split = rows.split(",")
+
+                if filedata_split[0] == employeeID:
+                    inputFilelines = filedata.readlines()
+                    lineindex = 1
+
+                    with open("datos.txt", 'w') as filedata:
+                        for textline in inputFilelines:
+                            if lineindex != deleteLine:
+                                filedata.write(textline)
+                                lineindex += 1
+                                filedata.close()
+                                fd.close()
+                                
+
+                else:
+                    deleteLine = deleteLine + 1
+
+        else: #da error
+            messagebox.showerror("IDnotFound", "Couldn't find employee with such ID")
 
     def actualizar(self):
         pass
