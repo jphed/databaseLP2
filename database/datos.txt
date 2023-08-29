@@ -1,0 +1,4 @@
+2,Lui,Hernandez,male,A,400
+3,Manuel,Saemz,male,B,300
+4,Alex,Carrasco,male,D,200
+5,Jose,Holguin,male,A,100

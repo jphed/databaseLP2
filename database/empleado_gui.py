@@ -84,32 +84,12 @@ class App():
 
     def borrar(self):
         employeeID = askstring('EmployeeID', 'Type the employee ID')
-        data = eu.EmpleadoArchivo.borrar(int(employeeID))
-        fd = open("datos.txt", 'r')
-            
-        if data == True: #entra al if
-            deleteLine = 1
-            for rows in fd:
-                filedata_split = rows.split(",")
-
-                if filedata_split[0] == employeeID:
-                    inputFilelines = filedata.readlines()
-                    lineindex = 1
-
-                    with open("datos.txt", 'w') as filedata:
-                        for textline in inputFilelines:
-                            if lineindex != deleteLine:
-                                filedata.write(textline)
-                                lineindex += 1
-                                filedata.close()
-                                fd.close()
-                                
-
-                else:
-                    deleteLine = deleteLine + 1
-
-        else: #da error
-            messagebox.showerror("IDnotFound", "Couldn't find employee with such ID")
+        data = eu.EmpleadoArchivo.borrar(employeeID)
+        
+        if data == True:
+            messagebox.showinfo(title="Done",message="Employee's Informations was successfully deleted")
+        elif data == False:
+            messagebox.showinfo(title="Error",message="ID doesn't match with any employee")
 
     def actualizar(self):
         pass
