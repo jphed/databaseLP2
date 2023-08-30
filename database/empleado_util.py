@@ -155,13 +155,6 @@ class EmpleadoArchivo:
         nameGend = ' '.join(a)
         lastnameGend = ' '.join(b)
         
-
-
-        
-
-
-        print(nameGend, lastnameGend)
-
         #Gender randomizer
         amogus = random.randint(0,1)
         if amogus == 0:
