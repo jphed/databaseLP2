@@ -1,6 +1,7 @@
 import empleado as e
 import os
 from tkinter import messagebox
+import random
 
 class EmpleadoArchivo:
     @staticmethod
@@ -133,6 +134,75 @@ class EmpleadoArchivo:
                 statement = False
                 return int(num)
 
-            
+    @staticmethod
+    def genPerson()->e.Empleado:
 
+        #Name and last name randomizer
+        filetext = open("names.txt", "r")
+        txtlist = []
+        c = 0
+        for row in filetext:
+            c += 1
+            split = row.split()
+            txtlist.append(split)
+
+        x = random.randint(0,c)
+        y = random.randint(0,c)
+
+        a = txtlist[x]
+        b = txtlist[y]
+
+        nameGend = ' '.join(a)
+        lastnameGend = ' '.join(b)
+        
+
+
+        
+
+
+        print(nameGend, lastnameGend)
+
+        #Gender randomizer
+        amogus = random.randint(0,1)
+        if amogus == 0:
+            gendergend = "male"
+        else:
+            gendergend = "female"
+
+        #department randomizer
+        sugoma = random.randint(0,3)
+        if sugoma == 0:
+            departmentGend = 'A'
+        elif sugoma == 1:
+            departmentGend = 'B'
+        elif sugoma == 2:
+            departmentGend = 'C'
+        elif sugoma == 3:
+            departmentGend = 'D'
+        
+        #salary randomizer
+
+        begula = random.randint(100,1000)
+        salaryGend = begula
+        
+        #id Randomizer
+        filetext = open("datos.txt", "r")
+        idList = []
+
+        for row in filetext:
+            filetext_split = row.split(",")
+            idList.append(filetext_split[0])
+        
+
+        idGend = random.randint(1,100)
+        while str(idGend) in idList:
+            idGend = random.randint(1,100)
+
+        
+        data = e.Empleado(idGend,nameGend,lastnameGend, gendergend, departmentGend, salaryGend)
+        return data
+
+
+    
+        
 

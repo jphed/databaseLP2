@@ -12,7 +12,7 @@ class App():
     def __init__(self):
         self.window = tk.Tk()
         self.window.title("Employees")
-        self.window.geometry("500x500")
+        self.window.geometry("550x500")
 
         #Imagen
         begula = tk.PhotoImage(file='./img/ez.png') 
@@ -25,6 +25,9 @@ class App():
 
         #next free button
         ttk.Button(self.window, text="Next free ID", command=self.nextidfree).grid(column=3,row=1, sticky="WE", padx=10)
+
+        #generate person button
+        ttk.Button(self.window, text="Generate random data", command=self.generatePerson).grid(column=3,row=2, sticky="WE", padx=10)
 
         # Entry (Nombre)
         ttk.Label(self.window, text="First name").grid(column=0,row=2, sticky="W", ipadx=5, ipady=5, padx=10)
@@ -109,6 +112,15 @@ class App():
     def nextidfree(self):
         data = eu.EmpleadoArchivo.nextfree(1)
         self.id.set(data)
+
+    def generatePerson(self):
+        data = eu.EmpleadoArchivo.genPerson()
+        self.id.set(data.id)
+        self.name.set(data.nombre)
+        self.last_name.set(data.apellido1)
+        self.gender.set(data.sexo)
+        self.department.set(data.departamento)
+        self.salary.set(data.sueldo)
         
 
 if __name__ == '__main__':
