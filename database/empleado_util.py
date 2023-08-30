@@ -85,7 +85,35 @@ class EmpleadoArchivo:
 
     @staticmethod
     def actualizar(e:e.Empleado)->None:
-        pass
+
+        filetext = open("datos.txt", "r")
+        #new_filetext = open("datos2.txt", "w")
+        #new_filetext.close()
+        new_filetext = open("datos2.txt", "a")
+
+        for row in filetext:
+
+            filetext_split = row.split(",")
+
+            if filetext_split[0] != str(e.id):
+                new_filetext.write(row)
+            else:
+                new_filetext.write(f"{e.id},{e.nombre},{e.apellido1},{e.sexo},{e.departamento},{e.sueldo}")
+
+        filetext.close(); new_filetext.close()
+        os.remove("datos.txt")
+
+        copyable = open("datos2.txt", "r")
+        new_main_textfile = open("datos.txt", "a")
+
+        for i in copyable:
+            new_main_textfile.write(i)
+
+        copyable.close(); new_main_textfile.close()
+        os.remove("datos2.txt")
+
+        messagebox.showinfo(message="Employee successfully updated", title="update")
+
 
     @staticmethod
     def nextfree(num:int)->int:

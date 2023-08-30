@@ -1,3 +1,6 @@
+import tkinter as tk
+from tkinter import messagebox
+
 class Empleado:
     def __init__(self, id, nombre, apellido1, sexo, departamento, sueldo):
         self.id = id
@@ -16,6 +19,7 @@ class Empleado:
         if not isinstance(id, (int)):
             raise TypeError("id debe ser un número")
         if not (id>0 and id <= 100):
+            messagebox.showerror(message="ID must be in range between 1-100")
             raise ValueError("Valor debe estar entre 1 y 100")
         self.__id = id
 
