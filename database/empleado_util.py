@@ -1,12 +1,28 @@
 import empleado as e
 import os
+from tkinter import messagebox
 
 class EmpleadoArchivo:
     @staticmethod
     def agregar(emp:e.Empleado)->None:
-        f = open("datos.txt", "a")
-        f.write(f"{emp.id},{emp.nombre},{emp.apellido1},{emp.sexo},{emp.departamento},{emp.sueldo}\n")
-        f.close()
+
+        verify = open("datos.txt", "r")
+        id_in_use = False
+        for row in verify:
+
+            verify_split = row.split(",")
+            if emp.id == int(verify_split[0]):
+                id_in_use = True
+
+        verify.close()
+
+        if id_in_use == True:
+            messagebox.showerror(title="Error", message="ID is already in use")
+        else:
+            f = open("datos.txt", "a")
+            f.write(f"{emp.id},{emp.nombre},{emp.apellido1},{emp.sexo},{emp.departamento},{emp.sueldo}\n")
+            f.close()
+            messagebox.showinfo(title="Addition", message="user was successfully added")
 
     @staticmethod
     def buscar(id:int)->e.Empleado:
@@ -32,23 +48,24 @@ class EmpleadoArchivo:
         new_filetext.write("")
         new_filetext.close()
 
-        #const to verify if id is in datos
-        c = 0
+        #const to verify if id is in datos.txt
+        c = 0; k = 0
 
         for rows in filetext:
-
+            c += 1
             filetext_split = rows.split(",")
-
+        
             if id != filetext_split[0]:
-                c += 1
+                k += 1
                 new_filetext = open("datos2.txt", "a")
                 new_filetext.write(rows)
-
-        if c == 0:
+        
+        if c == k:
             filetext.close()
             new_filetext.close()
             os.remove("datos2.txt")
             return False
+        
         else:
             filetext.close()
             new_filetext.close()
@@ -69,3 +86,25 @@ class EmpleadoArchivo:
     @staticmethod
     def actualizar(e:e.Empleado)->None:
         pass
+
+    @staticmethod
+    def nextfree(num:int)->int:
+        filetext = open("datos.txt", "r")
+        IDlist = []
+        statement = True
+        for row in filetext:
+            filetext_split = row.split(",")
+            IDlist.append(filetext_split[0])
+
+        filetext.close()
+
+        while statement:
+            if str(num) in IDlist:
+                num += 1
+            else:
+                statement = False
+                return int(num)
+
+            
+
+
