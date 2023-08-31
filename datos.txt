@@ -3,6 +3,3 @@
 3,Manuel,Saemz,male,B,300
 4,Alex,Carrasco,male,D,200
 5,Jose,Holguin,male,A,100
-92,Azaleah,Cathe,male,B,960
-15,Kolivas,Cammie,male,D,597
-37,Horne,Karyn,male,B,204
