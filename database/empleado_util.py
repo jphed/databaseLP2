@@ -9,10 +9,10 @@ class EmpleadoArchivo:
 
         verify = open("datos.txt", "r")
         id_in_use = False
-        for row in verify:
 
+        for row in verify:
             verify_split = row.split(",")
-            if emp.id == int(verify_split[0]):
+            if str(emp.id) == verify_split[0]:
                 id_in_use = True
 
         verify.close()
