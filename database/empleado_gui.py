@@ -5,13 +5,14 @@ import empleado as e
 import empleado_util as eu
 from tkinter import messagebox
 from tkinter.simpledialog import askstring
+import tkinter.scrolledtext as st
 
 # Empleados
 
 class App():
     def __init__(self):
         self.window = tk.Tk()
-        self.window.title("Employees")
+        self.window.title("Employees Manager")
         self.window.geometry("550x500")
 
         #Imagen
@@ -28,6 +29,9 @@ class App():
 
         #generate person button
         ttk.Button(self.window, text="Generate random data", command=self.generatePerson).grid(column=3,row=2, sticky="WE", padx=10)
+
+        #show the list button
+        ttk.Button(self.window, text="Show list", command=self.show).grid(column=3,row=3, sticky="WE", padx=10)
 
         # Entry (Nombre)
         ttk.Label(self.window, text="First name").grid(column=0,row=2, sticky="W", ipadx=5, ipady=5, padx=10)
@@ -121,7 +125,29 @@ class App():
         self.gender.set(data.sexo)
         self.department.set(data.departamento)
         self.salary.set(data.sueldo)
-        
 
+    def show(self):
+        self.kfc = tk.Tk()
+        self.kfc.title("Employees list")
+        self.kfc.geometry('1200x600')
+
+        self.scrollt = st.ScrolledText(self.kfc, width = 40, height = 8, font = ("Courier",15))
+        self.scrollt.grid(column = 0, row=0, columnspan=3, padx=10, pady=10)
+        self.scrollt.pack(side="left", fill="both", expand=True)
+
+        self.scrollt.delete("1.0",tk.END)
+        self.scrollt.insert(tk.INSERT, f"ID\t\tNAME\t\tLAST NAME\t\tGENDER\t\tDEPARTMENT\t\tSALARY\n")
+
+        
+        filedata = open("datos.txt", "r")
+
+        for row in filedata:
+            split_filedata = row.split(",")
+            self.scrollt.insert(tk.INSERT, f"{split_filedata[0]}\t\t{split_filedata[1]}\t\t{split_filedata[2]}\t\t{split_filedata[3]}\t\t{split_filedata[4]}\t\t{split_filedata[5]}\n")
+
+
+        self.scrollt.config(state="disabled")
+
+        
 if __name__ == '__main__':
     App()
